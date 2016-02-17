@@ -22,5 +22,8 @@ return [
             'rules' => [
             ],
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+        ],
     ],
 ];

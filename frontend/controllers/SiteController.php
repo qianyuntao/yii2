@@ -12,7 +12,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use components\PhpManager;
 /**
  * Site controller
  */
@@ -25,7 +25,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => 'components\PhpManager',
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
