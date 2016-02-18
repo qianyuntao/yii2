@@ -12,7 +12,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use components\PhpManager;
+use frontend\controllers\Test;
 /**
  * Site controller
  */
@@ -21,11 +21,13 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
+    public $createdBy = '1';
+
     public function behaviors()
     {
         return [
             'access' => [
-                'class' => 'components\PhpManager',
+                'class' => AccessControl::className(),
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
@@ -209,5 +211,16 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionTestauth(){
+        $post = $this;
+        if (\Yii::$app->user->can('updateOwnPost',['post' => $post])) {
+            // 建贴
+            echo "允许建贴";
+        }
+        else{
+            echo "权限不足";
+        }
     }
 }
